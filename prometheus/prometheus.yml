@@ -1,0 +1,15 @@
+# Global configuration settings for Prometheus
+global:
+  # How often Prometheus will scrape (pull) metrics from targets
+  scrape_interval: 10s
+
+# Define the list of targets (endpoints) to scrape metrics from
+scrape_configs:
+  # A job represents a group of similar targets
+  - job_name: "green-container-collector"
+    # Static configuration (manually defined targets)
+    static_configs:
+      # List of endpoints that Prometheus will scrape
+      # "host.docker.internal" allows a Docker container (Prometheus) to access services running on the host machine
+      # Port 8000 is where our Flask collector is running
+      - targets: ["host.docker.internal:8000"]

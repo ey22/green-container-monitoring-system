@@ -1,0 +1,29 @@
+# Define all services (containers) in the system
+services:
+  # Prometheus service (metrics collector and storage)
+  prometheus:
+    # Use official Prometheus image from Docker Hub
+    image: prom/prometheus
+    # Custom container name for easier identification
+    container_name: green-prometheus
+    # Expose Prometheus UI on localhost:9090
+    ports:
+      - "9090:9090"
+
+    # Mount local Prometheus config file into container
+    # This allows us to define scrape targets
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  # Grafana service (dashboard visualization tool)
+  grafana:
+    # Use official Grafana image
+    image: grafana/grafana
+    # Custom container name
+    container_name: green-grafana
+    # Expose Grafana UI on localhost:3000
+    ports:
+      - "3000:3000"
+    # Ensure Grafana starts after Prometheus
+    depends_on:
+      - prometheus

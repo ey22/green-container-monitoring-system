@@ -1,0 +1,117 @@
+<!--
+  Custom web dashboard interface of the Green Container Monitoring System.
+  Displays container resource metrics, estimated energy consumption, CO₂ emissions and total power.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Container Monitor</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div>
+        <h1>Green Container Monitor</h1>
+        <p>Container-level energy, power, CPU and memory monitoring.</p>
+      </div>
+
+      <a class="grafana-button" href="http://localhost:3000/d/adjkkgp/green-container-sustainability-dashboard?orgId=1&from=now-30m&to=now&timezone=browser&var-container=$__all" target="_blank">
+        Open Grafana Dashboard
+      </a>
+    </header>
+
+    <section class="controls">
+      <label>
+        Time Range
+        <select id="timeRange">
+          <option value="5m">Last 5 minutes</option>
+          <option value="10m" selected>Last 10 minutes</option>
+          <option value="1h">Last 1 hour</option>
+          <option value="6h">Last 6 hours</option>
+        </select>
+      </label>
+
+      <label>
+        Container
+        <select id="containerSelect">
+          <option value="all">All containers</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <span>⚡ Total Power</span>
+        <strong id="totalPower">-</strong>
+        <small>Current estimated power usage</small>
+      </div>
+
+      <div class="card">
+        <span>🔋 Energy Used</span>
+        <strong id="energyUsed">-</strong>
+        <small>Consumed during selected time range</small>
+      </div>
+
+      <div class="card">
+        <span>🌱 Estimated CO₂</span>
+        <strong id="co2">-</strong>
+        <small>Estimated carbon emission</small>
+      </div>
+
+      <div class="card">
+        <span>⚠️ Highest Consumer</span>
+        <strong id="highestConsumer">-</strong>
+        <small>Top container by energy usage</small>
+      </div>
+
+      <div class="card led-card">
+        <span>LED Bulb Equivalent</span>
+        <strong id="ledHours">-</strong>
+        <small>Equivalent usage time of a 9W LED bulb</small>
+      </div>
+
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Container Metrics</h2>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Container</th>
+              <th>Status</th>
+              <th>CPU %</th>
+              <th>Memory MB</th>
+              <th>Power W</th>
+              <th>Energy Wh</th>
+              <th>CO₂ g</th>
+            </tr>
+          </thead>
+          <tbody id="containerTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="charts">
+      <div class="panel">
+        <h2>Power Usage Over Time</h2>
+        <canvas id="powerChart"></canvas>
+      </div>
+
+      <div class="panel">
+        <h2>Energy by Container</h2>
+        <canvas id="energyChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>
