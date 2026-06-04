@@ -55,7 +55,7 @@ docker-compose.yml
 ### Clone the Repository
 
 ```bash
-git clone <https://github.com/ey22/green-container-monitoring-system.git>
+git clone https://github.com/ey22/green-container-monitoring-system.git
 cd green-container-monitoring-system
 ```
 
@@ -101,7 +101,7 @@ The system estimates:
 - Power Consumption (W)
 - Energy Consumption (Wh)
 - CO₂ Emissions (g)
-- Usage time of a 9W LED bulb (min)
+- Usage time equivalent of a 9W LED bulb (min)
 
 ### Custom Dashboard
 <img width="1419" height="671" alt="Screenshot 2026-06-04 at 15 08 34" src="https://github.com/user-attachments/assets/1e41e19f-7e4f-436a-99a5-87fd9defaa20" />
